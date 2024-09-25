@@ -1,0 +1,132 @@
+Solution 1
+SELECT
+  *
+FROM
+  video
+WHERE
+  no_of_views > 100000
+ORDER BY
+  name ASC;
+
+Solution 2
+SELECT
+  video_id,
+  name,
+  duration_in_secs,
+  no_of_views
+FROM
+  video
+WHERE
+  channel_id = 353
+  AND no_of_views > 50000
+ORDER BY
+  no_of_views DESC,
+  name ASC
+
+Solution 3
+SELECT
+  name,
+  channel_id,
+  no_of_views
+FROM
+  video
+ORDER BY
+  no_of_views DESC,
+  published_datetime DESC
+LIMIT
+  10 OFFSET 0;
+
+Solution 4
+SELECT
+  name,
+  channel_id,
+  no_of_views,
+  published_datetime
+FROM
+  video
+WHERE
+  no_of_views > 100000
+  AND name LIKE '%trailer%'
+ORDER BY
+  no_of_views DESC,
+  published_datetime DESC;
+
+Solution 5
+SELECT
+  video_id,
+  name,
+  duration_in_secs,
+  no_of_views
+FROM
+  video
+WHERE
+  CAST(strftime("%Y", published_datetime) AS INTEGER) = 2018
+ORDER BY
+  published_datetime DESC,
+  name ASC;
+
+Solution 6
+SELECT
+  DISTINCT video_id
+FROM
+  video_genre
+WHERE
+  genre_id IN ("201", "202", "203", "211")
+ORDER BY
+  video_id DESC;
+
+Solution 7
+SELECT
+  name,
+  published_datetime,
+  no_of_views
+FROM
+  video
+WHERE
+  name LIKE "%esport%"
+  AND no_of_views > 100000
+  AND CAST(strftime("%Y", published_datetime) AS INTEGER) BETWEEN 2018
+  AND 2020
+ORDER BY
+  no_of_views DESC,
+  published_datetime DESC;
+
+Solution 8
+SELECT
+  count(name) AS channels_count
+FROM
+  channel;
+
+Solution 9
+SELECT
+  max(no_of_views) AS highest_number_of_views,
+  min(no_of_views) AS least_number_of_views
+FROM
+  video;
+
+Solution 10
+SELECT
+  avg(no_of_views) AS avg_views
+FROM
+  video
+WHERE
+  channel_id = 373;
+
+Solution 11
+SELECT
+  count(premium_membership) AS premium_users_count
+FROM
+  user
+WHERE
+  premium_membership = 1;
+
+Solution 12
+SELECT
+  gender,
+  count (*) AS total_users
+FROM
+  user
+WHERE
+  premium_membership = 1
+GROUP BY
+  gender;
